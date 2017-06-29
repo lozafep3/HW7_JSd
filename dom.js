@@ -1,11 +1,25 @@
+//var elem = document.querySelector('p');
+var elem = document.getElementById('test');
+
+console.log( 'Element:' );
+console.log( elem );
+
 /**
  * removeAllSpans -  функция, которая удаляет все элементы span со страницы
  */
 
 function removeAllSpans () {
-	// TODO
+
+    var allSpans = document.querySelectorAll('span');
+
+    for (var i = allSpans.length - 1; i >= 0; i--) {
+        var span = document.querySelector('span');
+        span.parentNode.removeChild(span);
+    }
+
 }
 
+// removeAllSpans();
 
 /**
  * firstChild -  функция, которая будет кроссбразурено возвращать firstChild (не текстовую ноду).
@@ -16,8 +30,17 @@ function removeAllSpans () {
 
 function firstChild (parent) {
 
+    var children = parent.childNodes;
+    var i = 0;
+
+    do { i++ } while (children[i - 1].nodeType !== 3);
+
+    return parent.childNodes[i];
+
 }
 
+console.log( 'First child:' );
+console.log( firstChild( elem ) );
 
 /**
  * lastChild -  функция, будет кроссбраузерно возвращать lastChild (не текстовую ноду).
@@ -28,8 +51,17 @@ function firstChild (parent) {
 
 function lastChild (parent) {
 
+    var children = parent.childNodes;
+    var i = children.length;
+
+    do { i-- } while (children[i - 1].nodeType !== 3);
+
+    return parent.childNodes[i];
+
 }
 
+console.log( 'Last child:' );
+console.log( lastChild( elem ) );
 
 /**
  * next -  функция, которая будет кроссбраузерно возвращать следующий элемент
@@ -41,8 +73,22 @@ function lastChild (parent) {
 
 function next (node) {
 
+    var sibling = node.nextSibling;
+
+    while (sibling !== null) {
+        if ( sibling.nodeType !== 3 ) {
+            break;
+        } else {
+            sibling = sibling.nextSibling;
+        }
+    }
+
+    return sibling;
+
 }
 
+console.log( 'Next sibling:');
+console.log( next( elem ) );
 
 /**
  * prev -  функция, которая будет кроссбраузерно возвращать предыдущий элемент
@@ -54,8 +100,24 @@ function next (node) {
 
 function prev (node) {
 
+    var sibling = node.previousSibling;
+
+    while (sibling !== null) {
+        if ( sibling.nodeType !== 3 ) {
+            break;
+        } else {
+            sibling = sibling.previousSibling;
+        }
+    }
+
+    return sibling;
+
 }
 
+console.log( 'Previous sibling:');
+console.log( prev( elem ) );
+
+//=================================================================================
 
 /**
  * OPTIONAL
